@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const ProjectSchema = new mongoose.Schema({
   title: {
@@ -24,25 +25,30 @@ const ProjectSchema = new mongoose.Schema({
       /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
     ],
     required: false,
-    unique: true,
+    unique: false,
     trim: true
   },
   tech: {
-    type: String,
+    
+    type: [String],
     required: [true, 'Please add what was used to build this project'],
-    unique: false,
-    trim: true,
-    maxlength: [100, `This can't exceed 100 characters`]
+    
   },
-  deploy:{
-      type: Boolean,
-      default: false
+  deploy: {
+    type: Boolean,
+    default: false
   },
-  picture:{
-      type: String,
-      default: 'no-photo.jpg'
+  picture: {
+    type: String,
+    default: 'no-photo.jpg'
   }
-
 });
 
-module.exports= mongoose.model('Project',ProjectSchema)
+// Create Project Slug from Title
+
+ProjectSchema.pre('save', function(next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
+});
+
+module.exports = mongoose.model('Project', ProjectSchema);

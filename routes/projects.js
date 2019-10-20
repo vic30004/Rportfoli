@@ -15,7 +15,7 @@ router
 
 router
   .route('/:id')
-  .get(getProjects)
+  .get(getProject)
   .put(updateProject)
   .delete(deleteProject);
 
