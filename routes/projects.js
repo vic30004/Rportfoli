@@ -4,9 +4,15 @@ const {
   getProjects,
   createProject,
   updateProject,
-  deleteProject
+  deleteProject,
+  projectPhotoUpload
 } = require('../controllers/projects');
+
+
 const router = express.Router();
+
+
+router.route('/:id/photo').put(projectPhotoUpload)
 
 router
   .route('/')

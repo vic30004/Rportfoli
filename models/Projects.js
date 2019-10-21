@@ -41,6 +41,10 @@ const ProjectSchema = new mongoose.Schema({
   picture: {
     type: String,
     default: 'no-photo.jpg'
+  },
+  addOn:{
+    type:Date,
+    default: Date.now
   }
 });
 
