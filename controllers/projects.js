@@ -2,6 +2,7 @@ const path = require('path');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 const Project = require('../models/Projects');
+
 // @desc       Get all projects
 // @route      Get /api/porfolio/project
 // @access     Public
