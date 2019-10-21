@@ -8,21 +8,21 @@ const {
   projectPhotoUpload
 } = require('../controllers/projects');
 
-
 const router = express.Router();
 
+const { protect, authorize } = require('../middleware/auth.js');
 
-router.route('/:id/photo').put(projectPhotoUpload)
+router.route('/:id/photo').put(protect,authorize('publisher','admin'), projectPhotoUpload);
 
 router
   .route('/')
   .get(getProjects)
-  .post(createProject);
+  .post(protect,authorize('publisher','admin'),createProject);
 
 router
   .route('/:id')
   .get(getProject)
-  .put(updateProject)
-  .delete(deleteProject);
+  .put(protect,authorize('publisher','admin'), updateProject)
+  .delete(protect,authorize('publisher','admin'), deleteProject);
 
 module.exports = router;
