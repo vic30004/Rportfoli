@@ -97,6 +97,9 @@ exports.getProject = asyncHandler(async (req, res, next) => {
 // @route      POST /api/porfolio/project/:id
 // @access     Private
 exports.createProject = asyncHandler(async (req, res, next) => {
+  // Add user to req.body
+  req.body.user = req.user.id;
+
   const project = await Project.create(req.body);
 
   res.status(201).json({
@@ -109,16 +112,29 @@ exports.createProject = asyncHandler(async (req, res, next) => {
 // @route      PUT /api/porfolio/project/:id
 // @access     Private
 exports.updateProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  let project = await Project.findById(req.params.id);
 
   if (!project) {
     return res.status(400).json({
       success: false
     });
   }
+  
+  // Make sure user is owner
+  if (project.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.params.id} is not authorized ot update this Project`,
+        401
+      )
+    );
+  }
+
+  project = await Project.findOneAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
+
   res.status(200).json({
     success: true,
     data: project
@@ -137,6 +153,17 @@ exports.deleteProject = asyncHandler(async (req, res, next) => {
       data: {}
     });
   }
+
+  // Make sure owner 
+  if (project.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.params.id} is not authorized ot delete this Project`,
+        401
+      )
+    );
+  }
+
   project.remove();
   res.status(201).json({
     success: true
@@ -168,6 +195,17 @@ exports.projectPhotoUpload = asyncHandler(async (req, res, next) => {
       400
     );
   }
+
+
+ // Make sure owner 
+ if (project.user.toString() !== req.user.id && req.user.role !== 'admin') {
+  return next(
+    new ErrorResponse(
+      `User ${req.params.id} is not authorized to update this Project`,
+      401
+    )
+  );
+}
 
   // Check Filessize
 

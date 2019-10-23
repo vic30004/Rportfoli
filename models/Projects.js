@@ -45,8 +45,19 @@ const ProjectSchema = new mongoose.Schema({
   addOn:{
     type:Date,
     default: Date.now
+  },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+    required: true
   }
-});
+
+},
+{
+  toJSON: {virtuals:true},
+  toObject: {virtuals: true}
+}
+);
 
 // Create Project Slug from Title
 
