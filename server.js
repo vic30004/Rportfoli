@@ -78,9 +78,9 @@ app.use('/api/v1/auth',auth)
 app.use('/api/v1/users',users)
 app.use(errorHandler);
 
-app.listen(process.env || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+// app.listen(process.env || 3000, function(){
+//   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+// });
 
 const server = app.listen(PORT, () => {
   console.log(
