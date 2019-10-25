@@ -1,8 +1,13 @@
 const path = require('path');
 const express = require('express');
+const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const rateLimit = require('express-rate-limit');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
@@ -24,6 +29,7 @@ connectDB();
 // Routes
 const projects = require('./routes/projects');
 const auth = require('./routes/auth')
+const users = require('./routes/users')
 
 const app = express();
 
@@ -45,10 +51,31 @@ if (process.env.NODE_ENV === 'development') {
 // File Uploading
 app.use(fileUpload());
 
+// Sanitize Data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet())
+
+// Prevent xss attacks
+app.use(xss());
+
+// Rate limit
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, //10min
+  max: 100
+});
+
+app.use(limiter);
+
+// prevent http param pollution
+app.use(hpp())
+
 // Mount routers
 
 app.use('/api/portfolio/projects', projects);
 app.use('/api/v1/auth',auth)
+app.use('/api/v1/users',users)
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
