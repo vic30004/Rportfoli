@@ -4,7 +4,7 @@
   "description": "Updated Portfolio with React",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
+    "start": "server",
     "dev": "nodemon server"
   },
   "repository": {
