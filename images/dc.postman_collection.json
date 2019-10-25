@@ -1,0 +1,582 @@
+{
+	"info": {
+		"_postman_id": "7a77b0dc-967d-49cc-ad77-000d7a2c2614",
+		"name": "Portfolio Api",
+		"description": "Backend API for my portfolio, to manage my projects.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/portfolio/projects",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"projects"
+							]
+						},
+						"description": "Get all projects from db. Includes pagination,, filtering etc.."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Single Project",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/portfolio/projects/5dac908a4a8af5741815be14",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"projects",
+								"5dac908a4a8af5741815be14"
+							]
+						},
+						"description": "Get single project by Id"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkYWQxMmQ1ODFkZGUyMTdiMGU2NjM3ZCIsImlhdCI6MTU3MTYzMDA2NiwiZXhwIjoxNTc0MjIyMDY2fQ.kvcGxDknzUplfKg7LvHJV5gsNCoB80h3k-3xCu3z9hw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "   \r\n   {\r\n\t\"title\": \"test\",\r\n    \"githubRepo\":\"https://github.com/vic30004\",\r\n    \"tech\":\"MERN\",\r\n    \"deploy\":false,\r\n    \"picture\":\"\"\r\n   }"
+						},
+						"url": {
+							"raw": "{{URL}}/api/portfolio/projects",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"projects"
+							]
+						},
+						"description": "Add new project to db. Must be authenticated and must be publisher or admin"
+					},
+					"response": []
+				},
+				{
+					"name": "Update project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Friend-Finder\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/portfolio/projects/5dafba6808f8d82df89a2f5e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"projects",
+								"5dafba6808f8d82df89a2f5e"
+							]
+						},
+						"description": "Update single project in db."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete project",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/portfolio/projects/5dacb79eae6b2752388b9dfd",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"projects",
+								"5dacb79eae6b2752388b9dfd"
+							]
+						},
+						"description": "Delete project from db."
+					},
+					"response": []
+				},
+				{
+					"name": "Update photo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Victor/Desktop/Rportfoli/images/friend-finder.JPG"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/api/portfolio/projects/5dace03d12bf0d4e7cd89dc0/photo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"portfolio",
+								"projects",
+								"5dace03d12bf0d4e7cd89dc0",
+								"photo"
+							]
+						},
+						"description": "Routes to upload a project photo"
+					},
+					"response": []
+				}
+			],
+			"description": "Projects CRUD functionality ",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Get logged user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"me"
+							]
+						},
+						"description": "This will get the logged in user"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/logout",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						},
+						"description": "This will logout the user"
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"victor.abuakleh@gmail.com\",\n\t\"password\": \"password4321\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Add user to db with encrypted password"
+					},
+					"response": []
+				},
+				{
+					"name": "LoginUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cff8f4a5-c554-4012-b88b-abef64729548",
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"victor.abuakleh@gmail.com\",\n\t\"password\": \"password4321\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n\t\"email\": \"victor.abuakleh@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/forgotpassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"forgotpassword"
+							]
+						},
+						"description": "This will generate a password token and send an email"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Detail",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"victor_993@msn.com\",\n\t\"name\": \"Victor AA\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/updatedetails",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"updatedetails"
+							]
+						},
+						"description": "This will update the users email and username"
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"password4321\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/resetpassword/857b07b7c2429db94bca7732b5d6a2bfcde848a5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"resetpassword",
+								"857b07b7c2429db94bca7732b5d6a2bfcde848a5"
+							]
+						},
+						"description": "This will reset the password"
+					},
+					"response": []
+				},
+				{
+					"name": "update password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "JSON type",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"currentPassword\": \"password43210\",\n\t\"newPassword\": \"password4321\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth/updatepassword",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"updatepassword"
+							]
+						},
+						"description": "This will update the password. "
+					},
+					"response": []
+				}
+			],
+			"description": "Routes for user authentication including register, login, reset pass etc...",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						},
+						"description": "This will get all the users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get single user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/users/5dad12d581dde217b0e6637d",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"5dad12d581dde217b0e6637d"
+							]
+						},
+						"description": "This will retreive one user."
+					},
+					"response": []
+				}
+			],
+			"description": "CRUD functionality for users only available to admins",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
