@@ -14,7 +14,7 @@ const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
 // route files
-
+const PORT = 5000;
 
 
 
