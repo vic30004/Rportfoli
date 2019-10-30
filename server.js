@@ -3,6 +3,7 @@ const express = require('express');
 const mongoSanitize = require('express-mongo-sanitize');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const cors = require('cors')
 const colors = require('colors');
 const helmet = require('helmet');
 const xss = require('xss-clean');
@@ -47,6 +48,9 @@ app.use(cookieParser())
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+// Cors 
+app.use(cors())
 
 // File Uploading
 app.use(fileUpload());
