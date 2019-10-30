@@ -24,8 +24,8 @@ const ProjectSchema = new mongoose.Schema({
     match: [
       /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
     ],
-    required: false,
-    unique: false,
+    unique:true,
+    sparse:true,
     trim: true
   },
   tech: {
@@ -45,11 +45,6 @@ const ProjectSchema = new mongoose.Schema({
   addOn:{
     type:Date,
     default: Date.now
-  },
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'User',
-    required: true
   }
 
 },
