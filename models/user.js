@@ -45,8 +45,8 @@ UserSchema.pre('save', async function(next) {
 
 // Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function() {
-  return jwt.sign({ id: this._id }, jasdasd49497dfhsdkfjs, {
-    expiresIn: 30d
+  return jwt.sign({ id: this._id }, "jasdasd49497dfhsdkfjs", {
+    expiresIn: "30d"
   });
 };
 
