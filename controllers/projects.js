@@ -87,7 +87,7 @@ exports.getProject = asyncHandler(async (req, res, next) => {
   const project = await Project.findById(req.params.id);
   if (!project) {
     return next(
-      new ErrorResponse(`Project not found with id of ${req.params.id}`, 404)
+      new ErrorResponse(`Project not found with id of ${req.params.id}`, 404) 
     );
   }
   res.status(200).json({ success: true, data: project });

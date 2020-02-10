@@ -28,6 +28,11 @@ const ProjectSchema = new mongoose.Schema({
     sparse:true,
     trim: true
   },
+  description:{
+    type:String,
+    required: [true, 'Please make sure to add a description'],
+    trim: true
+  },
   tech: {
     
     type: [String],
